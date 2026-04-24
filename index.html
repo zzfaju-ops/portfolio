@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoe Faju | Software Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0f2444;
+      --navy-mid: #1b3a6b;
+      --blue: #4a7ab5;
+      --blue-pale: #dce8f5;
+      --cream: #f4f6f9;
+      --gold: #c8941a;
+      --gold-pale: #fdf4dc;
+      --text-dark: #0a1628;
+      --text-mid: #2e4a6b;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: rgba(244,246,249,0.95); backdrop-filter: blur(8px); border-bottom: 1.5px solid var(--blue-pale); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); letter-spacing: 0.03em; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy-mid); }
+    .nav-admin-btn { background: var(--navy); color: var(--white) !important; padding: 0.4rem 1.1rem; border-radius: 999px; font-size: 0.8rem !important; cursor: pointer; }
+    .nav-admin-btn:hover { background: var(--gold) !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding: 7rem 4rem 4rem; align-items: center; gap: 4rem; background: var(--cream); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; right: -120px; top: -120px; width: 500px; height: 500px; border-radius: 50%; background: var(--blue-pale); z-index: 0; }
+    .hero::after { content: ''; position: absolute; left: -60px; bottom: -80px; width: 320px; height: 320px; border-radius: 50%; background: var(--gold-pale); z-index: 0; }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-tag { display: inline-block; background: var(--gold-pale); color: var(--navy); border: 1.5px solid var(--gold); border-radius: 999px; padding: 0.3rem 1rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: 1.12; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .hero h1 em { color: var(--navy-mid); font-style: italic; }
+    .hero-sub { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; margin: 1.2rem 0 2rem; max-width: 480px; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--navy); color: var(--white); padding: 0.8rem 2rem; border-radius: 999px; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--navy); padding: 0.8rem 2rem; border-radius: 999px; text-decoration: none; font-size: 0.95rem; font-weight: 500; border: 1.5px solid var(--blue); transition: border-color 0.2s, color 0.2s, transform 0.15s; }
+    .btn-outline:hover { border-color: var(--navy); color: var(--navy); transform: translateY(-2px); }
+    .hero-image-wrap { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+    .hero-img-frame { position: relative; width: 360px; height: 420px; }
+    .hero-img-frame::before { content: ''; position: absolute; top: 18px; left: 18px; width: 100%; height: 100%; border-radius: 2rem; border: 3px solid var(--blue); z-index: 0; }
+    .hero-img-frame::after { content: ''; position: absolute; bottom: -12px; right: -12px; width: 120px; height: 120px; border-radius: 50%; background: var(--gold-pale); border: 3px solid var(--gold); z-index: 0; }
+    .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 2rem; position: relative; z-index: 1; display: block; }
+    .img-badge { position: absolute; bottom: 24px; left: -30px; background: var(--white); border: 1.5px solid var(--blue); border-radius: 1rem; padding: 0.6rem 1rem; font-size: 0.8rem; color: var(--navy); font-weight: 500; z-index: 2; }
+
+    /* SOCIAL STRIP */
+    .social-strip { display: flex; gap: 1rem; align-items: center; padding: 1.2rem 4rem; background: var(--navy); flex-wrap: wrap; }
+    .social-strip span { color: var(--white); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; margin-right: 0.5rem; }
+    .social-link { background: rgba(255,255,255,0.12); color: var(--white); text-decoration: none; padding: 0.4rem 1.1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500; border: 1.5px solid rgba(255,255,255,0.28); transition: background 0.2s; }
+    .social-link:hover { background: rgba(255,255,255,0.22); }
+
+    /* SECTIONS */
+    section { padding: 5rem 4rem; }
+    .section-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); font-weight: 500; margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--text-dark); margin-bottom: 3rem; line-height: 1.2; }
+
+    /* ABOUT */
+    .about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { font-size: 1.05rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 1.2rem; }
+    .skills-section h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 1.2rem; }
+    .skill-group { margin-bottom: 1.4rem; }
+    .skill-group-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); font-weight: 500; margin-bottom: 0.5rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { background: var(--blue-pale); color: var(--navy-mid); border: 1.5px solid var(--blue); border-radius: 999px; padding: 0.3rem 0.85rem; font-size: 0.82rem; font-weight: 500; }
+
+    /* PROJECTS */
+    .projects { background: var(--gold-pale); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.8rem; }
+    .project-card {
+      background: var(--white); border: 1.5px solid var(--blue-pale); border-radius: 1.5rem;
+      padding: 1.8rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      display: flex; flex-direction: column; gap: 0.8rem; position: relative;
+      cursor: pointer;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(74,122,181,0.18); border-color: var(--blue); }
+    .project-card-top { display: flex; align-items: center; justify-content: space-between; }
+    .project-num { width: 42px; height: 42px; border-radius: 0.75rem; background: var(--gold); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+    .project-click-hint { font-size: 0.75rem; color: var(--blue); font-weight: 500; opacity: 0.7; transition: opacity 0.2s; }
+    .project-card:hover .project-click-hint { opacity: 1; }
+    .project-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--text-dark); }
+    .project-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; flex: 1; }
+    .project-tech-strip { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tech-tag { background: var(--navy); color: var(--white); border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.72rem; font-weight: 500; }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--blue-pale); padding-top: 0.8rem; margin-top: 0.4rem; }
+    .project-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--navy-mid); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .project-link:hover { color: var(--gold); }
+    .delete-btn { background: none; border: 1.5px solid #f0d0d0; color: #c0392b; border-radius: 0.5rem; padding: 0.2rem 0.6rem; font-size: 0.75rem; cursor: pointer; display: none; transition: background 0.2s; }
+    .delete-btn:hover { background: #fdecea; }
+    body.admin-mode .delete-btn { display: block; }
+
+    /* PROJECT DETAIL DRAWER */
+    .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(10,22,40,0.6); z-index: 300; }
+    .drawer-overlay.open { display: block; }
+    .drawer {
+      position: fixed; top: 0; right: -520px; width: 500px; max-width: 95vw;
+      height: 100vh; background: var(--white); z-index: 301;
+      overflow-y: auto; transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+      display: flex; flex-direction: column;
+    }
+    .drawer.open { right: 0; }
+    .drawer-header { background: var(--navy); padding: 2rem 2rem 1.5rem; position: relative; flex-shrink: 0; }
+    .drawer-close { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(255,255,255,0.15); border: none; color: var(--white); width: 36px; height: 36px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .drawer-close:hover { background: rgba(255,255,255,0.28); }
+    .drawer-num { display: inline-block; background: var(--gold); color: var(--white); border-radius: 0.5rem; padding: 0.2rem 0.7rem; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .drawer-title { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.6rem; line-height: 1.25; margin-bottom: 0.5rem; }
+    .drawer-body { padding: 2rem; flex: 1; }
+    .drawer-section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); font-weight: 500; margin-bottom: 0.6rem; margin-top: 1.6rem; }
+    .drawer-section-label:first-child { margin-top: 0; }
+    .drawer-text { font-size: 0.95rem; color: var(--text-mid); line-height: 1.75; }
+    .drawer-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.2rem; }
+    .drawer-tech-tag { background: var(--navy); color: var(--white); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.8rem; font-weight: 500; }
+    .drawer-highlights { list-style: none; margin-top: 0.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .drawer-highlights li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.93rem; color: var(--text-mid); line-height: 1.55; }
+    .drawer-highlights li::before { content: '▸'; color: var(--gold); font-size: 0.8rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .drawer-actions { padding: 1.5rem 2rem 2rem; border-top: 1px solid var(--blue-pale); flex-shrink: 0; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .drawer-btn-primary { background: var(--navy); color: var(--white); text-decoration: none; padding: 0.75rem 1.8rem; border-radius: 999px; font-size: 0.9rem; font-weight: 500; transition: background 0.2s; }
+    .drawer-btn-primary:hover { background: var(--gold); }
+    .drawer-btn-outline { background: transparent; color: var(--navy); text-decoration: none; padding: 0.75rem 1.8rem; border-radius: 999px; font-size: 0.9rem; font-weight: 500; border: 1.5px solid var(--blue); transition: border-color 0.2s, color 0.2s; }
+    .drawer-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* VIBE */
+    .vibe { background: var(--blue-pale); }
+    .vibe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .vibe-card { background: var(--white); border: 1.5px solid var(--blue); border-radius: 1.5rem; overflow: hidden; transition: transform 0.2s; }
+    .vibe-card:hover { transform: translateY(-4px); }
+    .vibe-card-header { background: var(--navy); padding: 1.5rem 1.8rem; }
+    .vibe-card-header h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.3rem; margin-bottom: 0.3rem; }
+    .vibe-card-header p { color: rgba(255,255,255,0.7); font-size: 0.88rem; }
+    .vibe-card-body { padding: 1.5rem 1.8rem; }
+    .vibe-card-body p { color: var(--text-mid); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem; }
+    .vibe-link { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--navy); color: var(--white); text-decoration: none; padding: 0.55rem 1.4rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500; transition: background 0.2s; }
+    .vibe-link:hover { background: var(--gold); }
+
+    /* CONTACT */
+    .contact { background: var(--navy); text-align: center; }
+    .contact .section-label { color: var(--gold); }
+    .contact .section-title { color: var(--white); margin-bottom: 1rem; }
+    .contact p { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+    .contact-btn { background: var(--gold); color: var(--white); text-decoration: none; padding: 0.9rem 2.2rem; border-radius: 999px; font-size: 0.95rem; font-weight: 500; transition: background 0.2s, transform 0.15s; display: flex; align-items: center; gap: 0.5rem; }
+    .contact-btn:hover { background: var(--blue); transform: translateY(-2px); }
+    .contact-btn.outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.35); color: var(--white); }
+    .contact-btn.outline:hover { background: rgba(255,255,255,0.1); }
+
+    footer { background: var(--text-dark); color: rgba(255,255,255,0.4); text-align: center; padding: 1.5rem; font-size: 0.82rem; }
+
+    /* MODALS (login + add project) */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,22,40,0.7); z-index: 500; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--white); border-radius: 1.5rem; padding: 2.5rem; width: 100%; max-width: 480px; margin: 1rem; }
+    .modal h2 { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .modal > p { color: var(--text-mid); font-size: 0.9rem; margin-bottom: 1.8rem; }
+    .modal label { display: block; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-mid); margin-bottom: 0.4rem; }
+    .modal input, .modal textarea { width: 100%; border: 1.5px solid var(--blue-pale); border-radius: 0.75rem; padding: 0.7rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.1rem; outline: none; transition: border-color 0.2s; }
+    .modal input:focus, .modal textarea:focus { border-color: var(--blue); }
+    .modal textarea { height: 90px; resize: vertical; }
+    .modal-actions { display: flex; gap: 0.8rem; justify-content: flex-end; margin-top: 0.5rem; }
+    .modal-cancel { background: none; border: 1.5px solid var(--blue-pale); color: var(--text-mid); padding: 0.65rem 1.4rem; border-radius: 999px; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; }
+    .modal-cancel:hover { background: var(--cream); }
+    .modal-save { background: var(--navy); color: var(--white); border: none; padding: 0.65rem 1.6rem; border-radius: 999px; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .modal-save:hover { background: var(--gold); }
+    .modal-error { color: #c0392b; font-size: 0.85rem; margin-bottom: 1rem; display: none; }
+
+    /* ADMIN BAR */
+    .admin-bar { display: none; background: var(--gold); padding: 0.7rem 4rem; align-items: center; justify-content: space-between; }
+    body.admin-mode .admin-bar { display: flex; }
+    .admin-bar span { color: var(--white); font-size: 0.85rem; font-weight: 500; }
+    .admin-bar-actions { display: flex; gap: 0.8rem; }
+    .admin-bar button { border: none; border-radius: 999px; padding: 0.4rem 1.1rem; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .btn-add { background: var(--white); color: var(--gold); }
+    .btn-add:hover { background: var(--gold-pale); }
+    .btn-logout { background: rgba(255,255,255,0.25); color: var(--white); }
+    .btn-logout:hover { background: rgba(255,255,255,0.4); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-text, .hero-image-wrap { animation: fadeUp 0.8s ease both; }
+    .hero-image-wrap { animation-delay: 0.15s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
+      .hero-image-wrap { order: -1; }
+      .hero-img-frame { width: 260px; height: 300px; }
+      section { padding: 3.5rem 1.5rem; }
+      .social-strip, .admin-bar { padding: 1rem 1.5rem; }
+      .about-grid, .vibe-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .drawer { width: 100vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar">
+  <span>Admin Mode — add and delete projects</span>
+  <div class="admin-bar-actions">
+    <button class="btn-add" onclick="openAddModal()">+ Add Project</button>
+    <button class="btn-logout" onclick="logout()">Log Out</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Zoe Faju</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#vibe">Vibe Coding</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-admin-btn" onclick="openLoginModal(event)">Admin</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-tag">Open to Opportunities</div>
+    <h1>Hi, I'm Zoe.<br><em>Software Developer</em><br>& Problem Solver.</h1>
+    <p class="hero-sub">Computer Science graduate (December 2025) building scalable systems, mentoring the next generation of engineers, and shipping real products. Passionate about clean code and creative solutions.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <div class="hero-img-frame">
+      <img src="headshot.jpg" alt="Zoe Faju" onerror="this.style.background='#dce8f5';" />
+      <div class="img-badge">Software Developer · Boston, MA</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <span>Connect →</span>
+  <a href="mailto:zoesfaju@hotmail.com" class="social-link">Email</a>
+  <a href="https://github.com/zzfaju-ops" target="_blank" class="social-link">GitHub</a>
+  <a href="https://www.linkedin.com/in/zoe-faju" target="_blank" class="social-link">LinkedIn</a>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label">Who I Am</div>
+  <h2 class="section-title">Building with purpose,<br>one commit at a time.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a Computer Science graduate from Kennesaw State University with hands-on experience building distributed systems, conducting code reviews, and mentoring aspiring engineers at Code the Dream.</p>
+      <p>I thrive in collaborative, fast-paced environments and care deeply about writing maintainable, purposeful code. Whether I'm debugging a gnarly issue or designing a system from scratch, I bring focus and creativity to the work.</p>
+      <p>Currently working toward my Google Generative AI Leader Certification and always exploring what's next in the tech world.</p>
+    </div>
+    <div class="skills-section">
+      <h3>Technical Skills</h3>
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-tags"><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">C/C#</span><span class="tag">Bash</span><span class="tag">Dart</span><span class="tag">Go (learning)</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Software Dev</div>
+        <div class="skill-tags"><span class="tag">Agile / Scrum</span><span class="tag">OOD</span><span class="tag">CI/CD</span><span class="tag">Git</span><span class="tag">Code Reviews</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Systems & DB</div>
+        <div class="skill-tags"><span class="tag">Microservices</span><span class="tag">RESTful APIs</span><span class="tag">SQL/MySQL</span><span class="tag">NoSQL</span><span class="tag">TCP/IP</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Cloud & AI/ML</div>
+        <div class="skill-tags"><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Linux</span><span class="tag">Machine Learning</span><span class="tag">GenAI Tools</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2 class="section-title">GitHub Projects</h2>
+  <div class="projects-grid" id="projects-grid">
+
+    <div class="project-card" data-static="true" onclick="openDrawer(0)">
+      <div class="project-card-top"><div class="project-num">01</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">My Portfolio Website</div>
+      <p class="project-desc">Personal developer portfolio built to impress recruiters and showcase my work.</p>
+      <div class="project-tech-strip"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/My-Portfolio-Website-" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(1)">
+      <div class="project-card-top"><div class="project-num">02</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">Pizza Application 2024</div>
+      <p class="project-desc">Full-featured pizza ordering app with order management and a modern interface.</p>
+      <div class="project-tech-strip"><span class="tech-tag">Python</span><span class="tech-tag">JavaScript</span><span class="tech-tag">SQL</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/Pizza-Application-2024-" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(2)">
+      <div class="project-card-top"><div class="project-num">03</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">Python Enterprise System Monitor</div>
+      <p class="project-desc">Enterprise-grade monitoring tool with real-time performance tracking.</p>
+      <div class="project-tech-strip"><span class="tech-tag">Python</span><span class="tech-tag">Linux</span><span class="tech-tag">CLI</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/Python-Enterprise-System-Monitor-" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(3)">
+      <div class="project-card-top"><div class="project-num">04</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">Retail Website</div>
+      <p class="project-desc">E-commerce site with product listings, shopping cart, and clean UX.</p>
+      <div class="project-tech-strip"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/Retail-Website" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(4)">
+      <div class="project-card-top"><div class="project-num">05</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">RMI Election System</div>
+      <p class="project-desc">Distributed voting system using Java RMI for secure real-time elections.</p>
+      <div class="project-tech-strip"><span class="tech-tag">Java</span><span class="tech-tag">RMI</span><span class="tech-tag">Networking</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/RMI-Election-System-Website-" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(5)">
+      <div class="project-card-top"><div class="project-num">06</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">Application of Linked Lists</div>
+      <p class="project-desc">Practical data structures project demonstrating linked list implementations.</p>
+      <div class="project-tech-strip"><span class="tech-tag">Java</span><span class="tech-tag">Data Structures</span><span class="tech-tag">OOD</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/Application-of-Linked-Lists-" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(6)">
+      <div class="project-card-top"><div class="project-num">07</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">Python Game</div>
+      <p class="project-desc">Interactive game demonstrating logic, state management, and user input design.</p>
+      <div class="project-tech-strip"><span class="tech-tag">Python</span><span class="tech-tag">Game Logic</span><span class="tech-tag">OOP</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/Python-Game-" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(7)">
+      <div class="project-card-top"><div class="project-num">08</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">MegaCalculator</div>
+      <p class="project-desc">Feature-rich calculator with advanced operations far beyond basic arithmetic.</p>
+      <div class="project-tech-strip"><span class="tech-tag">Java</span><span class="tech-tag">Swing GUI</span><span class="tech-tag">Math Logic</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/zzfaju-ops/MegaCalculator" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-static="true" onclick="openDrawer(8)">
+      <div class="project-card-top"><div class="project-num">09</div><span class="project-click-hint">Click to explore →</span></div>
+      <div class="project-name">Budget App</div>
+      <p class="project-desc">Collaborative finance tracker with intuitive tools and real-time updates.</p>
+      <div class="project-tech-strip"><span class="tech-tag">JavaScript</span><span class="tech-tag">CSS</span><span class="tech-tag">HTML</span></div>
+      <div class="project-footer">
+        <a href="https://github.com/1e1ouch/Budget-App" target="_blank" class="project-link" onclick="event.stopPropagation()">View on GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIBE CODING -->
+<section class="vibe" id="vibe">
+  <div class="section-label">Vibe Coding</div>
+  <h2 class="section-title">AI-Powered Apps<br>I've Shipped</h2>
+  <div class="vibe-grid">
+    <div class="vibe-card">
+      <div class="vibe-card-header"><h3>Vibe Prompt Craft</h3><p>Live · vibe-prompt-craft-97.lovable.app</p></div>
+      <div class="vibe-card-body">
+        <p>A prompt engineering tool built with AI-assisted development, helping users craft, iterate, and refine prompts for generative AI tools. Built and deployed using Lovable.</p>
+        <a href="https://vibe-prompt-craft-97.lovable.app" target="_blank" class="vibe-link">Launch App ↗</a>
+      </div>
+    </div>
+    <div class="vibe-card">
+      <div class="vibe-card-header"><h3>RepurposeHQ</h3><p>Live · repurposehq.lovable.app</p></div>
+      <div class="vibe-card-body">
+        <p>A content repurposing platform that helps creators transform their existing content into multiple formats. Built and deployed using Lovable with AI-driven development workflows.</p>
+        <a href="https://repurposehq.lovable.app" target="_blank" class="vibe-link">Launch App ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Ready to Build<br>Something Great?</h2>
+  <p>I'm actively seeking software engineering and developer roles. Let's talk!</p>
+  <div class="contact-links">
+    <a href="mailto:zoesfaju@hotmail.com" class="contact-btn">Send Me an Email</a>
+    <a href="https://github.com/zzfaju-ops" target="_blank" class="contact-btn outline">GitHub</a>
+    <a href="https://www.linkedin.com/in/zoe-faju" target="_blank" class="contact-btn outline">LinkedIn</a>
+  </div>
+</section>
+
+<footer><p>© 2026 Zoe Faju · Boston, MA</p></footer>
+
+<!-- PROJECT DETAIL DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="project-drawer">
+  <div class="drawer-header">
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    <div class="drawer-num" id="d-num">01</div>
+    <div class="drawer-title" id="d-title">Project Name</div>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section-label">About This Project</div>
+    <p class="drawer-text" id="d-about"></p>
+
+    <div class="drawer-section-label">What It Does</div>
+    <ul class="drawer-highlights" id="d-highlights"></ul>
+
+    <div class="drawer-section-label">Tech Stack</div>
+    <div class="drawer-tech" id="d-tech"></div>
+  </div>
+  <div class="drawer-actions" id="d-actions"></div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>Admin Login</h2>
+    <p>Enter your password to manage projects.</p>
+    <div class="modal-error" id="login-error">Incorrect password. Try again.</div>
+    <label>Password</label>
+    <input type="password" id="admin-password" placeholder="Enter password" onkeydown="if(event.key==='Enter') doLogin()" />
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal('login-modal')">Cancel</button>
+      <button class="modal-save" onclick="doLogin()">Log In</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PROJECT MODAL -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <h2>Add Project</h2>
+    <p>Fill in the details — it will appear on your portfolio instantly.</p>
+    <label>Project Name *</label>
+    <input type="text" id="new-name" placeholder="e.g. Weather Dashboard" />
+    <label>Short Description *</label>
+    <textarea id="new-desc" placeholder="Brief description shown on the card..."></textarea>
+    <label>Full Description *</label>
+    <textarea id="new-full-desc" placeholder="Detailed explanation of what you built and why..."></textarea>
+    <label>Tech Stack (comma separated) *</label>
+    <input type="text" id="new-tech" placeholder="e.g. Python, Flask, PostgreSQL" />
+    <label>Key Highlights (one per line)</label>
+    <textarea id="new-highlights" placeholder="Users can log in and track spending&#10;Built with RESTful API&#10;Deployed on AWS"></textarea>
+    <label>GitHub or Live Link *</label>
+    <input type="text" id="new-link" placeholder="https://github.com/zzfaju-ops/..." />
+    <label>Live Demo Link (optional)</label>
+    <input type="text" id="new-demo" placeholder="https://myapp.com" />
+    <div class="modal-error" id="add-error">Please fill in all required fields.</div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal('add-modal')">Cancel</button>
+      <button class="modal-save" onclick="saveProject()">Add Project</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── CHANGE THIS PASSWORD ──────────────────────────────
+  const ADMIN_PASSWORD = 'zoe2026';
+  // ─────────────────────────────────────────────────────
+
+  const STORAGE_KEY = 'zoe_portfolio_projects';
+
+  // Static project data for the drawer
+  const STATIC_PROJECTS = [
+    {
+      num: '01', title: 'My Portfolio Website',
+      about: 'A fully responsive personal portfolio website designed to present my skills, projects, and experience to recruiters and hiring managers in a professional and visually engaging way.',
+      highlights: ['Designed and built a multi-section single-page application from scratch', 'Includes an admin panel for adding and managing projects without touching code', 'Responsive layout that works seamlessly on desktop and mobile', 'Deployed live via GitHub Pages'],
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'GitHub Pages'],
+      link: 'https://github.com/zzfaju-ops/My-Portfolio-Website-', demo: ''
+    },
+    {
+      num: '02', title: 'Pizza Application 2024',
+      about: 'A full-stack pizza ordering application that allows customers to browse a menu, customize orders, and track them through the system. Focuses on clean UI and smooth order flow.',
+      highlights: ['Menu browsing with item customization (size, toppings)', 'Order management system tracking order status end-to-end', 'Persistent data storage with a relational database', 'User-friendly interface built for speed and clarity'],
+      tech: ['Python', 'JavaScript', 'SQL', 'HTML/CSS'],
+      link: 'https://github.com/zzfaju-ops/Pizza-Application-2024-', demo: ''
+    },
+    {
+      num: '03', title: 'Python Enterprise System Monitor',
+      about: 'An enterprise-grade system monitoring tool that tracks CPU usage, memory consumption, disk I/O, and network activity in real time. Built for diagnostics and operational visibility.',
+      highlights: ['Real-time performance metrics: CPU, RAM, disk, and network', 'Threshold-based alerting to flag abnormal system behavior', 'Clean CLI dashboard for quick system health assessment', 'Modular design for easy extension to additional metrics'],
+      tech: ['Python', 'psutil', 'Linux', 'CLI'],
+      link: 'https://github.com/zzfaju-ops/Python-Enterprise-System-Monitor-', demo: ''
+    },
+    {
+      num: '04', title: 'Retail Website',
+      about: 'A fully functional retail e-commerce front end featuring product discovery, a shopping cart, and a streamlined checkout experience. Designed with real-world UX principles in mind.',
+      highlights: ['Product listing with categories and search functionality', 'Interactive shopping cart with live quantity and total updates', 'Clean, mobile-friendly layout optimized for conversion', 'Structured HTML/CSS with reusable component patterns'],
+      tech: ['HTML5', 'CSS3', 'JavaScript'],
+      link: 'https://github.com/zzfaju-ops/Retail-Website', demo: ''
+    },
+    {
+      num: '05', title: 'RMI Election System',
+      about: 'A distributed election system built using Java Remote Method Invocation (RMI), enabling secure and real-time voting across a network. Demonstrates distributed systems design and fault handling.',
+      highlights: ['Clients connect remotely to a central voting server via Java RMI', 'Ensures each voter can only cast one vote through server-side validation', 'Real-time vote tallying and result broadcasting', 'Demonstrates core distributed systems concepts: remote calls, serialization, networking'],
+      tech: ['Java', 'Java RMI', 'TCP/IP Networking', 'OOP'],
+      link: 'https://github.com/zzfaju-ops/RMI-Election-System-Website-', demo: ''
+    },
+    {
+      num: '06', title: 'Application of Linked Lists',
+      about: 'A focused data structures project that implements singly and doubly linked lists and applies them to solve practical programming problems, reinforcing algorithmic thinking and OOP design.',
+      highlights: ['Implemented singly and doubly linked list classes from scratch', 'Solved practical use cases: task queues, undo/redo stacks, and sorted insertion', 'Demonstrated time and space complexity trade-offs', 'Well-documented code ideal for academic and interview reference'],
+      tech: ['Java', 'Data Structures', 'Algorithms', 'OOP'],
+      link: 'https://github.com/zzfaju-ops/Application-of-Linked-Lists-', demo: ''
+    },
+    {
+      num: '07', title: 'Python Game',
+      about: 'An interactive command-line game built in Python that demonstrates core programming concepts including game loops, state management, user input handling, and conditional logic.',
+      highlights: ['Engaging gameplay loop with win/lose conditions', 'Dynamic state tracking across multiple game rounds', 'Clean separation of game logic and user interface', 'Demonstrates Python fundamentals in a fun, applied context'],
+      tech: ['Python', 'OOP', 'Game Logic', 'CLI'],
+      link: 'https://github.com/zzfaju-ops/Python-Game-', demo: ''
+    },
+    {
+      num: '08', title: 'MegaCalculator',
+      about: 'A feature-rich calculator application that goes well beyond basic arithmetic, supporting advanced mathematical operations through a polished graphical interface.',
+      highlights: ['Supports standard, scientific, and advanced math operations', 'Built with a Java Swing GUI for a clean desktop experience', 'Input validation and error handling for edge cases', 'Extensible codebase designed for adding new operation types'],
+      tech: ['Java', 'Java Swing', 'GUI Development', 'Math Logic'],
+      link: 'https://github.com/zzfaju-ops/MegaCalculator', demo: ''
+    },
+    {
+      num: '09', title: 'Budget App',
+      about: 'A collaborative personal finance application that helps users set budgets, log expenses, and track spending over time. Built with a focus on clarity and ease of use.',
+      highlights: ['Add, categorize, and delete income and expense entries', 'Real-time running balance and category breakdowns', 'Clean, intuitive UI designed for everyday use', 'Collaborative project demonstrating teamwork and version control'],
+      tech: ['JavaScript', 'HTML5', 'CSS3'],
+      link: 'https://github.com/1e1ouch/Budget-App', demo: ''
+    }
+  ];
+
+  // ── DRAWER ──
+  function openDrawer(index) {
+    const p = STATIC_PROJECTS[index];
+    document.getElementById('d-num').textContent = p.num;
+    document.getElementById('d-title').textContent = p.title;
+    document.getElementById('d-about').textContent = p.about;
+
+    const hl = document.getElementById('d-highlights');
+    hl.innerHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
+
+    const tech = document.getElementById('d-tech');
+    tech.innerHTML = p.tech.map(t => `<span class="drawer-tech-tag">${t}</span>`).join('');
+
+    const actions = document.getElementById('d-actions');
+    actions.innerHTML = `<a href="${p.link}" target="_blank" class="drawer-btn-primary">View on GitHub</a>` +
+      (p.demo ? `<a href="${p.demo}" target="_blank" class="drawer-btn-outline">Live Demo</a>` : '');
+
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('project-drawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openDynamicDrawer(p) {
+    document.getElementById('d-num').textContent = p.num;
+    document.getElementById('d-title').textContent = p.name;
+    document.getElementById('d-about').textContent = p.fullDesc || p.desc;
+
+    const hl = document.getElementById('d-highlights');
+    hl.innerHTML = (p.highlights || []).map(h => `<li>${h}</li>`).join('');
+
+    const tech = document.getElementById('d-tech');
+    tech.innerHTML = (p.tech || []).map(t => `<span class="drawer-tech-tag">${t}</span>`).join('');
+
+    const actions = document.getElementById('d-actions');
+    actions.innerHTML = `<a href="${p.link}" target="_blank" class="drawer-btn-primary">${p.linkLabel || 'View Project'}</a>` +
+      (p.demo ? `<a href="${p.demo}" target="_blank" class="drawer-btn-outline">Live Demo</a>` : '');
+
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.getElementById('project-drawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.getElementById('project-drawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+  // ── ADMIN ──
+  function openLoginModal(e) {
+    if (e) e.preventDefault();
+    if (document.body.classList.contains('admin-mode')) return;
+    document.getElementById('admin-password').value = '';
+    document.getElementById('login-error').style.display = 'none';
+    document.getElementById('login-modal').classList.add('open');
+    setTimeout(() => document.getElementById('admin-password').focus(), 100);
+  }
+
+  function doLogin() {
+    const pw = document.getElementById('admin-password').value;
+    if (pw === ADMIN_PASSWORD) {
+      document.body.classList.add('admin-mode');
+      closeModal('login-modal');
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('admin-password').value = '';
+      document.getElementById('admin-password').focus();
+    }
+  }
+
+  function logout() { document.body.classList.remove('admin-mode'); }
+
+  function openAddModal() {
+    ['new-name','new-desc','new-full-desc','new-tech','new-highlights','new-link','new-demo'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('add-error').style.display = 'none';
+    document.getElementById('add-modal').classList.add('open');
+    setTimeout(() => document.getElementById('new-name').focus(), 100);
+  }
+
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+  });
+
+  // ── PROJECTS STORAGE ──
+  function getProjects() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+  }
+  function saveProjects(projects) { localStorage.setItem(STORAGE_KEY, JSON.stringify(projects)); }
+
+  function renderProjects() {
+    const grid = document.getElementById('projects-grid');
+    grid.querySelectorAll('[data-dynamic]').forEach(el => el.remove());
+    const projects = getProjects();
+    const staticCount = grid.querySelectorAll('[data-static]').length;
+
+    projects.forEach((p, i) => {
+      p.num = String(staticCount + i + 1).padStart(2, '0');
+      const techArr = (p.tech || '').split(',').map(t => t.trim()).filter(Boolean);
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.setAttribute('data-dynamic', p.id);
+      card.setAttribute('onclick', `openDynamicDrawer(${JSON.stringify(p).replace(/"/g,'&quot;')})`);
+      card.innerHTML = `
+        <button class="delete-btn" onclick="event.stopPropagation();deleteProject('${p.id}')">Remove</button>
+        <div class="project-card-top"><div class="project-num">${p.num}</div><span class="project-click-hint">Click to explore →</span></div>
+        <div class="project-name">${escHtml(p.name)}</div>
+        <p class="project-desc">${escHtml(p.desc)}</p>
+        <div class="project-tech-strip">${techArr.map(t=>`<span class="tech-tag">${escHtml(t)}</span>`).join('')}</div>
+        <div class="project-footer">
+          <a href="${escHtml(p.link)}" target="_blank" class="project-link" onclick="event.stopPropagation()">${escHtml(p.linkLabel||'View Project')} →</a>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  function saveProject() {
+    const name = document.getElementById('new-name').value.trim();
+    const desc = document.getElementById('new-desc').value.trim();
+    const fullDesc = document.getElementById('new-full-desc').value.trim();
+    const tech = document.getElementById('new-tech').value.trim();
+    const highlightsRaw = document.getElementById('new-highlights').value.trim();
+    const link = document.getElementById('new-link').value.trim();
+    const demo = document.getElementById('new-demo').value.trim();
+
+    if (!name || !desc || !link) { document.getElementById('add-error').style.display = 'block'; return; }
+
+    const highlights = highlightsRaw ? highlightsRaw.split('\n').map(h=>h.trim()).filter(Boolean) : [];
+    const projects = getProjects();
+    projects.push({ id: Date.now().toString(), name, desc, fullDesc, tech, highlights, link, demo, linkLabel: 'View Project' });
+    saveProjects(projects);
+    renderProjects();
+    closeModal('add-modal');
+  }
+
+  function deleteProject(id) {
+    if (!confirm('Remove this project?')) return;
+    saveProjects(getProjects().filter(p => p.id !== id));
+    renderProjects();
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  renderProjects();
+</script>
+</body>
+</html>
